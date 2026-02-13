@@ -8,14 +8,11 @@ RUN apk add --no-cache curl
 # Copy package files
 COPY package*.json ./
 
-# Install all dependencies (including dev dependencies for TypeScript build)
+# Install all dependencies (including dev dependencies for TypeScript)
 RUN npm install
 
 # Copy source code
 COPY . .
-
-# Build TypeScript to JavaScript
-RUN npm run build
 
 # Expose port
 EXPOSE 5000
@@ -24,5 +21,5 @@ EXPOSE 5000
 HEALTHCHECK --interval=15s --timeout=10s --retries=5 --start-period=30s \
     CMD curl -f http://localhost:5000/api/health || exit 1
 
-# Start the application
-CMD ["npm", "start"]
+# Start the application using ts-node (skip type checking for faster startup)
+CMD ["npx", "ts-node", "--transpile-only", "src/app.ts"]

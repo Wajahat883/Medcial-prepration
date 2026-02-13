@@ -2,19 +2,22 @@
   "name": "medical-exam-prep-server",
   "version": "1.0.0",
   "description": "AMC MCQ Exam Preparation Platform - Backend API",
-  "main": "dist/index.js",
+  "main": "dist/app.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
     "build": "tsc",
     "start": "node dist/app.js",
+    "start:prod": "npm run build && node dist/app.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
     "seed": "ts-node src/utils/seed.ts",
-    "seed:questions": "ts-node src/utils/seedQuestions.ts"
-    ,
+    "seed:questions": "ts-node src/utils/seedQuestions.ts",
     "migrate": "ts-node src/migrations/001_phase1_collections.ts"
   },
   "keywords": [
